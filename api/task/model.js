@@ -44,9 +44,17 @@ const insert = async (newTask) => {
 
     return transform
 }
+async function getProjectById(project_id){
+    const rows = db("projects")
+    .where("project_id",project_id)
+    .select("project_name","project_description","project_completed")
+    return rows
+ }
+
 module.exports = {
     getAll,
-    insert
+    insert,
+    getProjectById
 }
 
 ///each task contains task_notes and task_description and task_completed (as a boolean) (78 ms)
