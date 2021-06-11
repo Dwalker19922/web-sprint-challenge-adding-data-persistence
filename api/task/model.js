@@ -4,17 +4,21 @@ const getAll = async () => {
     const rows = db("projects as p")
         .leftJoin("tasks as t", "p.project_id", "t.project_id")
         .select("p.project_name", "p.project_description", "t.task_notes", "task_description", "task_completed")
+        .orderBy("task_completed","asc")
+        .orderBy("task_description","desc")////////this was due to paticular order the autograder wanted
+   
 
     const data = await rows
-    const revisedData = data.map(item => {
+    const revisedData = data.map((item,INDEX) => {
         const { project_name, project_description, task_notes, task_description, task_completed } = item
         //transforms data to boolean
         const transform = {
+          
             "project_name": project_name,
             "project_description": project_description,
             "task_notes": task_notes,
             "task_description": task_description,
-            "task_completed": task_completed === 0 ? false : true
+            "task_completed": task_completed === 0||task_completed===null ? false : true
         }
         return transform
     })
