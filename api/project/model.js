@@ -33,7 +33,6 @@ const rows = await db("projects")
 .insert(newProject)
 const id = await rows[0]
 const data = await getById(id)
-console.log(data)
 const {project_name,project_description,project_completed}= await data[0]
 const returnData={
    "project_id":id,

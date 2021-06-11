@@ -3,10 +3,14 @@
 //server setup
 const express = require('express')
 const resources = express.Router()
+const resourcesM =require("./model")
 
 //test endpoint
-resources.get("/test",(req, res,next) => {
-    res.json({message:"connection successful"})
+resources.get("/",(req, res,next) => {
+    resourcesM.getAll()
+    .then(rsc=>{
+        res.json(rsc)
+    })
 })
 
 //export

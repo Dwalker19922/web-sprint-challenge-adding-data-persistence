@@ -6,8 +6,15 @@ exports.up = function(knex) {
       table.text("project_description",128)
       table.boolean("project_completed").defaultTo(false)
   })
+  .createTable("resources",table=>{
+    table.increments("resource_id")
+    table.text("resource_name",128).notNullable().unique()
+    table.text("resource_description",128)
+})
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists("projects")
+  return knex.schema
+  .dropTableIfExists("projects")
+  .dropTableIfExists("resources")
 };
