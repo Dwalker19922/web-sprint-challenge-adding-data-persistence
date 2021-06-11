@@ -10,6 +10,11 @@ const getNameById=(resource_id)=>{
     .select("resource_name")
     return rows
 }
+const getNamebyName=(resource_name)=>{
+    const rows=db("resources")
+    .where("resource_name",resource_name)
+    return rows
+}
 const insert= async(newPost)=>{
 const rows = await db("resources")
 .insert(newPost)
@@ -20,5 +25,6 @@ return data
 }
 module.exports={
     getAll,
-    insert
+    insert,
+    getNamebyName
 }

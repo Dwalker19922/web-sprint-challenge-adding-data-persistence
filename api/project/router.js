@@ -3,6 +3,7 @@
 //router setup
 const express = require('express')
 const projects = express.Router()
+const { validateProject } =require('./middleWare')
 //import model
 const projectM=require("./model")
 //endpoint get
@@ -13,7 +14,7 @@ projectM.getAll()
 })
 })
 //endpoint post
-projects.post("/",(req,res,next)=>{
+projects.post("/",validateProject,(req,res,next)=>{
     console.log(req.body)
     projectM.insert(req.body)
     .then(pjs=>{

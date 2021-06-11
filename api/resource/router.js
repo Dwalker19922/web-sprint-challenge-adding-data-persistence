@@ -1,5 +1,5 @@
 // build your `/api/resources` router here
-
+const {verifyUniqueName}= require("./middleWare")
 //server setup
 const express = require('express')
 const resources = express.Router()
@@ -12,7 +12,7 @@ resources.get("/",(req, res,next) => {
         res.json(rsc)
     })
 })
-resources.post("/",(req,res,next)=>{
+resources.post("/",verifyUniqueName,(req,res,next)=>{
 resourcesM.insert(req.body)
 .then(rsc=>{
     res.json(rsc)
