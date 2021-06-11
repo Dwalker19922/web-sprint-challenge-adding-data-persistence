@@ -4,15 +4,19 @@
 const express = require('express')
 const projects = express.Router()
 const { validateProject } =require('./middleWare')
+
 //import model
 const projectM=require("./model")
+
 //endpoint get
-projects.get("/",(req,res,next)=>{
+projects.get("/",(req,res,next)=>{// eslint-disable-line
 projectM.getAll()
 .then(pjs=>{
     res.json(pjs)
 })
+.catch(next)
 })
+
 //endpoint post
 projects.post("/",validateProject,(req,res,next)=>{
     console.log(req.body)
@@ -20,6 +24,7 @@ projects.post("/",validateProject,(req,res,next)=>{
     .then(pjs=>{
         res.json(pjs)
     })
+    .catch(next)
 })
 
 
