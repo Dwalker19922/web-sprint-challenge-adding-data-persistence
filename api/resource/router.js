@@ -12,6 +12,13 @@ resources.get("/",(req, res,next) => {
         res.json(rsc)
     })
 })
+resources.post("/",(req,res,next)=>{
+resourcesM.insert(req.body)
+.then(rsc=>{
+    res.json(rsc)
+})
+
+})
 
 //export
 module.exports =resources
